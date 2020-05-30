@@ -42,44 +42,14 @@ Nous somme parvenu à rendre un programme sans aucuns problème connus restant !
 
 Voici une partie des logs que nous pouvons voir lors du parsing du fichier `geojson` et la création du fichier `kml` par notre programme Java :
 
-```
-(BDI) Burundi
-	 - 307 coordinates
-
-
-(BEL) Belgium
-	 - 653 coordinates
-
-
-(BEN) Benin
-	 - 617 coordinates
-
-
-(BFA) Burkina Faso
-	 - 1111 coordinates
-
-
-(BGD) Bangladesh
-	 - 43 coordinates
-	 - 22 coordinates
-	 - 17 coordinates
-	 - 27 coordinates
-	 - 13 coordinates
-	 - 9 coordinates
-	 - 18 coordinates
-	 - 30 coordinates
-	 - 13 coordinates
-	 - 8 coordinates
-	 ...
-```
-
+![](images\proof_parsing_compilateur.png)
 
 
 ## Test dans Google Earth
 
 Voici une démonstration après l'import de notre fichier dans Google Earth Pro avec la sélection demandée.
 
-![](proof_google_earth.png)
+![](images\proof_google_earth.png)
 
 ## Apprentissage
 
@@ -90,7 +60,7 @@ Dans ce laboratoire, nous avons dû prendre connaissance de deux nouveaux format
 
 ## Conclusion
 
-Le fait de réaliser un projet dont nous pouvons voir un résultat concret, nous a fait prendre conscience à quel point ces types de fichiers peuvent être utiles.
+Le fait de réaliser un projet dont nous pouvons voir un résultat concret, nous a fait prendre conscience à quel point ces types de fichiers peuvent être utiles lors de la manipulation de données en grandes quantités.
 
 Nous avons réussi à nous partager le travail équitablement ce qui à fortement contribuer à la réalisation de ce laboratoire sans rencontrer de problèmes en restant très efficaces.
 

@@ -25,14 +25,20 @@ public class KMLWriter {
 
         root.addContent(docElem);
 
+        // permet à l'ouverture du fichier KML de voir tous les pays disponibles sur Google Earth
         Element opeN = new Element("open", ns).setText("1");
+
+        // permet de modifier le style des différents "composants" disponibles en KML (ici Polygon)
         Element styleElem = new Element("Style", ns);
         styleElem.setAttribute(new Attribute("id", "borders"));
 
+        // permet de définir la couleur et la largeur de la ligne extérieur des Polygon
         Element styleLine = new Element("LineStyle", ns);
         styleLine.addContent(new Element("color", ns).setText("ffffffff"));
         styleLine.addContent(new Element("width", ns).setText("2"));
 
+        // permet de modifier la couleur du Polygon et définir s'il détient une bordure extérieure
+        // ici, les Polygon sont transparent pour ne laisser que les bordures extérieures visibles
         Element stylePoly = new Element("PolyStyle", ns);
         stylePoly.addContent(new Element("fill", ns).setText("0"));
         stylePoly.addContent(new Element("outline", ns).setText("1"));
@@ -64,7 +70,7 @@ public class KMLWriter {
         //récupère les propriétés du pays
         JSONObject countryProperties = (JSONObject) country.get("properties");
 
-        //récupère la géometrie du pays
+        //récupère la géometrie du pays (Polygon ou MultiPolygon, ainsi que les coordonnées)
         JSONObject countryGeometry = (JSONObject) country.get("geometry");
 
         JSONArray countryPolygons = (JSONArray) countryGeometry.get("coordinates");
@@ -79,10 +85,14 @@ public class KMLWriter {
 
     private void writeKMLFile(String countryISO, String countryName, String countryGeoType, JSONArray countryPolygons) {
         Element placemark = new Element("Placemark", ns);
+
+        // nom affiché dans Google Earth pour chaque pays
         placemark.addContent(new Element("name", ns).setText(countryName));
+
+        // nom du style à appliquer pour chaque Polygon/MultiPolygon
         placemark.addContent(new Element("styleUrl", ns).setText("#borders"));
 
-        //dans country
+        // dans le cas où un pays détient plusieurs frontières (îles par exemple -> MultiPolygon)
         Element geometryElem = new Element("MultiGeometry", ns);
 
         System.out.println("(" + countryISO + ") " + countryName);
@@ -105,12 +115,13 @@ public class KMLWriter {
 
         Element polygonElem = new Element("Polygon", ns);
 
-
         for(int i = 0; i < polygon.size(); ++i){
             Element cooElem = new Element("coordinates", ns);
+            // éléments nécessaires pour la création d'un Polygon en KML
             Element lineElem = new Element("LinearRing", ns);
             Element outerboundElem = new Element("outerBoundaryIs", ns);
             Element innerboundElem = new Element("innerBoundaryIs", ns);
+
             JSONArray coordinates = (JSONArray)polygon.get(i);
 
             //pour toute coordonnée dans le polygon
